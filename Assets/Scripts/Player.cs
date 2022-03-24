@@ -1,79 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private LayerMask climbableLayer;
-    private bool isClimbing;
-    private bool tryingToClimb;
-    private Rigidbody2D body;
-    private Game game;
-    private void Start()
+    // Move player in 2D space
+    public float moveSpeed, jumpForce;
+    public Transform groundPoint;
+    bool isGrounded = false;
+
+    private float inputX;
+
+    Rigidbody2D rb;
+    CapsuleCollider2D col;
+    public LayerMask ground;
+
+    // Use this for initialization
+    void Start()
     {
-        body = GetComponent<Rigidbody2D>();
-        game = FindObjectOfType<Game>();
-        //set start pos
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<CapsuleCollider2D>();
+        rb.freezeRotation = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    // Update is called once per frame
+    void Update()
     {
-        // If we collided with a bad thing we'll die
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Hazard"))
+        rb.velocity = new Vector2(inputX * moveSpeed, rb.velocity.y);
+        isGrounded = Physics2D.OverlapCircle(groundPoint.position, .1f, ground);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        inputX = context.ReadValue<Vector2>().x;
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (isGrounded)
         {
-            Die();
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
-    }
-
-    private void Update()
-    {
-        tryingToClimb = Input.GetButton("ClimbUp") || Input.GetButton("ClimbUp");
-    }
-
-    private void FixedUpdate()
-    {
-        RaycastHit2D ladderRay = Physics2D.Raycast(transform.position, Vector2.up, 1f, climbableLayer);
-        if (tryingToClimb)
-        {
-            isClimbing = ladderRay;
-        }
-
-        if (isClimbing)
-        {
-            body.gravityScale = 0;
-            body.velocity = new Vector2(body.velocity.x, Input.GetAxisRaw("Vertical") * 4f);
-        }
-
-        if (!ladderRay)
-        {
-            body.gravityScale = 3f;
-            isClimbing = false;
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<PlatformEffector2D>() != null && Input.GetButtonDown("ClimbDown"))
-        {
-            isClimbing = true;
-            StartCoroutine(FallThroughPlatform(collision.collider));
-        }
-    }
-
-    IEnumerator FallThroughPlatform(Collider2D collider)
-    {
-        collider.enabled = false;
-        yield return new WaitForSeconds(.5f);
-        collider.enabled = true;
-    }
-
-    private void Die()
-    {
-        // When we die, remove a life from the game
-        game.RemoveLife();
-        // And load the first level
-        SceneManager.LoadScene(0);
     }
 }
