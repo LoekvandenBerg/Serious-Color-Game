@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     bool isGrounded = false;
     public ColorEnum colorEnum;
     public Color color;
+    public GameObject gameOverMenu;
 
     private SpriteRenderer sr;
     private float inputX;
@@ -52,5 +54,23 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Hazard"))
+        {
+            GameOver();
+        }
+    }
+
+    void GameOver()
+    {
+        gameOverMenu.SetActive(true);
+    }
+
+    public void OnRetry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

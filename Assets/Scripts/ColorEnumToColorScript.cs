@@ -26,9 +26,9 @@ public class ColorEnumToColorScript : MonoBehaviour
             case ColorEnum.Red:
                 return Color.red;
             case ColorEnum.Orange:
-                return new Color(255, 215, 0);
+                return new Color(0.93f, 0.57f, 0, 1);
             case ColorEnum.Purple:
-                return new Color(128, 0, 128);
+                return new Color(1, 0, 1, 1);
             default:
                 return Color.white;
         }

@@ -17,7 +17,13 @@ public enum ColorEnum
 public class ColorMerger : MonoBehaviour
 {
     public ColorEnum colorToGive;
+    private SpriteRenderer sr;
 
+    private void Start()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        sr.color = ColorEnumToColorScript.instance.ColorEnumToColor(colorToGive);
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,11 +38,11 @@ public class ColorMerger : MonoBehaviour
 
     ColorEnum ColorMerge(ColorEnum playerColor)
     {
-        if (playerColor == ColorEnum.Blue && colorToGive == ColorEnum.Yellow)
+        if (playerColor == ColorEnum.Blue && colorToGive == ColorEnum.Yellow || playerColor == ColorEnum.Yellow && colorToGive == ColorEnum.Blue)
             return ColorEnum.Green;
-        else if (playerColor == ColorEnum.Blue && colorToGive == ColorEnum.Red)
+        else if (playerColor == ColorEnum.Blue && colorToGive == ColorEnum.Red || playerColor == ColorEnum.Red && colorToGive == ColorEnum.Blue)
             return ColorEnum.Purple;
-        else if (playerColor == ColorEnum.Red && colorToGive == ColorEnum.Yellow)
+        else if (playerColor == ColorEnum.Red && colorToGive == ColorEnum.Yellow || playerColor == ColorEnum.Yellow && colorToGive == ColorEnum.Red)
             return ColorEnum.Orange;
         else
             return colorToGive;
