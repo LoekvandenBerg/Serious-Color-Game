@@ -761,7 +761,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 806267982}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1883361075}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnRetry
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &806267982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,19 +964,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1393143350
-BoxCollider:
+--- !u!61 &1393143350
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393143349}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.20877129}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.7, y: 0.7}
+    newSize: {x: 0.7, y: 0.7}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5548339, y: 0.22598755, z: 0.2}
-  m_Center: {x: 0, y: -0.23700625, z: 0}
+  m_Size: {x: 0.5479685, y: 0.28245747}
+  m_EdgeRadius: 0
 --- !u!212 &1393143351
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1024,7 +1049,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393143349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.482042, y: -1.3337209, z: 0}
+  m_LocalPosition: {x: 3.62, y: -1.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1214,7 +1239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771930991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.81, y: -1, z: 0}
+  m_LocalPosition: {x: -1.29, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1281,6 +1306,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0347231a59c16924ea3fff41008cde30, type: 3}
+--- !u!114 &1883361075 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3627858924050793795, guid: aa86cec6eac2f4945acf16357fbc12b7, type: 3}
+  m_PrefabInstance: {fileID: 3627858923525829771}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7945e208f31dcf4ebe16c4d32359784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1964150626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,6 +1490,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3627858924050793795, guid: aa86cec6eac2f4945acf16357fbc12b7, type: 3}
+      propertyPath: gameOverMenu
+      value: 
+      objectReference: {fileID: 1586577740}
     - target: {fileID: 3627858924050793800, guid: aa86cec6eac2f4945acf16357fbc12b7, type: 3}
       propertyPath: m_Name
       value: Player
