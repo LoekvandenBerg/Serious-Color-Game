@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     bool isGrounded = false;
     public ColorEnum colorEnum;
     public Color color;
-    public GameObject gameOverMenu;
 
     private SpriteRenderer sr;
     private float inputX;
@@ -60,17 +59,7 @@ public class Player : MonoBehaviour
     {
         if(collision.CompareTag("Hazard"))
         {
-            GameOver();
+            Events.GameOver();
         }
-    }
-
-    void GameOver()
-    {
-        gameOverMenu.SetActive(true);
-    }
-
-    public void OnRetry()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    }    
 }
