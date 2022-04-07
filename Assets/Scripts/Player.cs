@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (isGrounded)
+        if (isGrounded && context.action.phase == InputActionPhase.Started)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }

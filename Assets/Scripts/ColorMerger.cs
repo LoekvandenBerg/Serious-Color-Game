@@ -18,6 +18,7 @@ public class ColorMerger : MonoBehaviour
 {
     public ColorEnum colorToGive;
     private SpriteRenderer sr;
+    bool active = true;
 
     private void Start()
     {
@@ -31,8 +32,12 @@ public class ColorMerger : MonoBehaviour
         {
             Player player = collision.GetComponent<Player>();
 
-            player.colorEnum = ColorMerge(player.colorEnum);
-            player.color = ColorEnumToColorScript.instance.ColorEnumToColor(player.colorEnum);
+            //if (active)
+            //{
+                player.colorEnum = ColorMerge(player.colorEnum);
+                player.color = ColorEnumToColorScript.instance.ColorEnumToColor(player.colorEnum);
+            //    active = false;
+            //}
         }
     }
 

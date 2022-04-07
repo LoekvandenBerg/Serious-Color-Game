@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
         Events.OnGameOver -= GameOver;
         gameOverMenu.SetActive(true);
+
     }
 
     public void OnRetry()
