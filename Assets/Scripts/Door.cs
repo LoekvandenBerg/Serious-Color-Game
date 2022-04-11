@@ -6,6 +6,8 @@ public class Door : MonoBehaviour
 {
     public ColorEnum colorToPass; 
     private SpriteRenderer sr;
+    public Sprite openSprite;
+    public BoxCollider2D collider1, collider2;
 
     private void Start()
     {
@@ -19,7 +21,11 @@ public class Door : MonoBehaviour
         {
             Player player = collision.GetComponent<Player>();
             if (player.colorEnum == colorToPass)
-                gameObject.SetActive(false);
+            {
+                sr.sprite = openSprite;
+                collider1.enabled = false;
+                collider2.enabled = false;
+            }
         }
     }
 }
