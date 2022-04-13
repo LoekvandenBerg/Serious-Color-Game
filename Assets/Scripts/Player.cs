@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 
 public class Player : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private float inputX;
 
     Rigidbody2D rb;
-    CapsuleCollider2D col;
+    BoxCollider2D col;
     public LayerMask ground;
 
     // Use this for initialization
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<CapsuleCollider2D>();
+        col = GetComponent<BoxCollider2D>();
         rb.freezeRotation = true;
 
         color = ColorEnumToColorScript.instance.ColorEnumToColor(colorEnum);
@@ -45,6 +45,14 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         inputX = context.ReadValue<Vector2>().x;
+        if(inputX < 0)
+        {
+            sr.flipX = true;
+        }
+        else if(inputX > 0)
+        {
+            sr.flipX = false;
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
